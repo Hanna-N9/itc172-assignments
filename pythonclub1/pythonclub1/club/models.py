@@ -3,52 +3,72 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class ProductType(models.Model):
+class MeetType(models.Model):
     typename=models.CharField(max_length=255)
     typedescription=models.CharField(max_length=255, null=True, blank=True)
-
+    
     def __str__(self):
         return self.typename
     
     class Meta:
-        db_table='producttype'
-        verbose_name_plural='producttypes'
+         db_table='MeetType'
+         verbose_name_plural='MeetTypes'
 
-class Product(models.Model):
-    productname=models.CharField(max_length=255)
-    producttype=models.ForeignKey(ProductType, on_delete=models.DO_NOTHING)
-    user=models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    productprice=models.DecimalField(max_digits=10, decimal_places=2)
-    productentrydate=models.DateField()
-    producturl=models.URLField(null=True, blank=True)
-    productdescription=models.TextField(null=True, blank=True)
+class Meet(models.Model):
+    meettitle=models.CharField(max_length=255)
+    meetentrydate=models.DateField() 
+    meetlocation=models.TextField()
+    meettime=models.TextField()
+    User=models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    meetdescription=models.TextField(null=True, blank=True)
     
     def __str__(self):
-        return self.productname
-
-    def memberdiscount(self):
-        discountpercent=.05
-        return float(self.productprice) * discountpercent
-    
-    def discountPrice(self):
-        discount=self.memberdiscount()
-        return float(self.productprice)-discount
+        return self.meetitle
     
     class Meta:
-        db_table='product'
-        verbose_name_plural='products'
+        db_table='meet'
+        verbose_name_plural='meets'
 
-class Review(models.Model):
-    reviewtitle=models.CharField(max_length=255)
-    reviewdate=models.DateField()
-    product=models.ForeignKey(Product, on_delete=models.CASCADE)
-    user=models.ManyToManyField(User)
-    reviewrating=models.SmallIntegerField()
-    reviewtext=models.TextField()
+class Resource(models.Model):
+    resourcename=models.CharField(max_length=255)
+    resourceentrydate=models.DateField() 
+    User=models.ManyToManyField(User)
+    resourceurl=models.URLField(null=True, blank=True)
+    resourcetype=models.TextField()
 
     def __str__(self):
-        return self.reviewtitle
+        return self.resourcename
     
     class Meta:
-        db_table='review'
-        verbose_name_plural='reviews'
+        db_table='resource'
+        verbose_name_plural='resources'
+
+class Minute(models.Model): 
+    minutename=models.CharField(max_length=255)
+    minuteid=models.ForeignKey(Meet, on_delete=models.CASCADE)
+    User=models.ManyToManyField(User)
+    minuteattendance=models.ManyToManyField
+    minutetext=models.TextField()
+
+    def __str__(self):
+        return self.minutename
+    
+    class Meta:
+        db_table='minute'
+        verbose_name_plural='minutes'
+    
+
+class Event(models.Model):
+    eventtitle=models.CharField(max_length=255)
+    evententrydate=models.DateField()
+    eventlocation=models.TextField()
+    eventtime =models.TextField()
+    User=models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    eventdescription=models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.eventtitle
+    
+    class Meta:
+        db_table='event'
+        verbose_name_plural='events'
