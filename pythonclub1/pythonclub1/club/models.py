@@ -15,7 +15,7 @@ class MeetType(models.Model):
          verbose_name_plural='MeetTypes'
 
 class Meet(models.Model):
-    meettitle=models.CharField(max_length=255)
+    meetname=models.CharField(max_length=255)
     meetentrydate=models.DateField() 
     meetlocation=models.TextField()
     meettime=models.TextField()
@@ -23,16 +23,17 @@ class Meet(models.Model):
     meetdescription=models.TextField(null=True, blank=True)
     
     def __str__(self):
-        return self.meetitle
+        return self.meetname
     
     class Meta:
         db_table='meet'
-        verbose_name_plural='meets'
+        verbose_name_plural='meet'
 
 class Resource(models.Model):
     resourcename=models.CharField(max_length=255)
     resourceentrydate=models.DateField() 
     User=models.ManyToManyField(User)
+    resourceid=models.ForeignKey(Meet, on_delete=models.CASCADE)
     resourceurl=models.URLField(null=True, blank=True)
     resourcetype=models.TextField()
 
@@ -59,7 +60,7 @@ class Minute(models.Model):
     
 
 class Event(models.Model):
-    eventtitle=models.CharField(max_length=255)
+    eventname=models.CharField(max_length=255)
     evententrydate=models.DateField()
     eventlocation=models.TextField()
     eventtime =models.TextField()
@@ -67,8 +68,12 @@ class Event(models.Model):
     eventdescription=models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.eventtitle
+        return self.eventname
     
     class Meta:
         db_table='event'
         verbose_name_plural='events'
+        
+    
+
+    

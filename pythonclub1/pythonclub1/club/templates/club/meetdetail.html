@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ m.meettname }}</h2>
+<p>Meet Type: {{ m.meettype }} </p>
+<p>Added by: {{ m.user }}</p>
+<p>Entry Date: {{ m.meetentrydate }}</p>
+<p>URL: {{ m.meeturl }}</p>
+<p>Description: {{ m.meetdescription }}</p>
+<p>No. Of Resources: {{ resources }}</p>
+
+{% endblock %}
