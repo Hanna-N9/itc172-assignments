@@ -90,7 +90,16 @@ class EventResourceView(TestCase):
         response = self.client.get(reverse("meetdetail", args=(self.meeting.id,)))
         self.assertEqual(response.status_code, 200)
 
-
-
-
-   
+#form tests
+class New_Meet_Form_Test(TestCase):
+    def test_meetform_is_valid(self):
+        form=MeetForm(data={'meetname' : "School Meeting", 'meetdate' : "2020-09-09", 'meettime' : "9:00", 'meetlocation' : "Seattle Central College", 'meetdescription' : "Attend for descriptions" })
+        self.assertTrue(form.is_valid())
+    
+    def test_meetform_invalid(self):
+        form=meetform(data={'meetname' : "School Meeting", 'meetdate' : "2020-09-09", 'meettime' : "9:00", 'meetlocation' : "Seattle Central College", 'meetdescription' : "Attend for descriptions" })
+        self.assertFalse(form.is_valid())
+        
+    def test_meetform_empty(self):
+        form=meetform(data={'meetname' : "School Meeting", 'meetdate' : "2020-09-09", 'meettime' : "9:00", 'meetlocation' : "Seattle Central College", 'meetdescription' : "Attend for descriptions" })
+        self.assertFalse(form.is_valid())
