@@ -103,3 +103,26 @@ class New_Meet_Form_Test(TestCase):
     def test_meetform_empty(self):
         form=meetform(data={'meetname' : "School Meeting", 'meetdate' : "2020-09-09", 'meettime' : "9:00", 'meetlocation' : "Seattle Central College", 'meetdescription' : "Attend for descriptions" })
         self.assertFalse(form.is_valid())
+
+class New_Resource_Form_Test(TestCase):
+    def test_resourceForm_is_valid(self):
+        form=ResourceForm(data={'resourcename': "Training", 'resourceentrydate': "2020-02-15", 'resourcedescription': "http://www.pythonevents.com", 'resourceurl': "www.github.com" })
+        self.assertTrue(form.is_valid())
+    
+    def test_resourceForm_invalid(self):
+        form=ResourceForm(data={'resourcename': "Training", 'resourceentrydate': "2020-02-15", 'resourcedescription': "http://www.pythonevents.com", 'resourceurl': "www.github.com" })
+        self.assertFalse(form.is_valid())
+    
+    def test_resourceform_invalid(self):
+        form=resourceform(data={'resourcename': "Training", 'resourceentrydate': "2020-02-15", 'resourcedescription': "http://www.pythonevents.com", 'resourceurl': "www.github.com" })
+        self.assertFalse(form.is_valid())
+        
+    def test_resourceform_empty(self):
+        form=resourceform(data={'resourcename': "Training", 'resourceentrydate': "2020-02-15", 'resourcedescription': "http://www.pythonevents.com", 'resourceurl': "www.github.com" })
+        self.assertFalse(form.is_valid())
+
+class New_Minute_Form_Test(TestCase):
+    def test_minuteForm_is_valid(self):
+        form=MinuteForm(data={'minuteattendance': "60", 'minutetime': "11:00am" })
+        self.assertTrue(form.is_valid())
+    

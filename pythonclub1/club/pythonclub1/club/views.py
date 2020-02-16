@@ -50,5 +50,30 @@ def newMeet(request):
           form=MeetForm()
      return render(request, 'club/newmeet.html', {'form': form})
 
+def neResource(request):
+     form=ResourceForm
+     if request.method=='POST':
+          form=ResourceForm(request.POST)
+          if form.is_valid():
+               post=form.save(commit=True)
+               post.save()
+               form=ResourceForm()
+     else:
+          form=ResourceForm()
+     return render(request, 'club/newmeet.html', {'form': form})
+
+def newMinute(request):
+     form=MinuteForm
+     if request.method=='POST':
+          form=MinuteForm(request.POST)
+          if form.is_valid():
+               post=form.save(commit=True)
+               post.save()
+               form=MinuteForm()
+     else:
+          form=MinuteForm()
+     return render(request, 'club/newmeet.html', {'form': form})
+
+
 
     
