@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Extra Tasks</h1>
+<table class='table'>
+ <tr>
+     <th>Name</th>
+     <th>Description</th>
+     <th>Change Date</th>
+ </tr>
+ {% for t in extratask_list %}
+   <tr>
+       <td>{{ t.uncompletedname }}</td>
+       <td>{{ t.uncompleteddescription }}</td>
+       <td>{{ t.uncompletedchangedate }}</td>
+
+   </tr>
+
+ {% endfor %}
+
+
+</table>
+
+
+{% endblock %}

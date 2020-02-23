@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Plan</h1>
+<table class='table'>
+ <tr>
+     <th>Title</th>
+     <th>Type</th>
+     <th>Description</th>
+ </tr>
+ {% for t in plan_list %}
+   <tr>
+       <td>{{ t.plantitle }}</td>
+       <td>{{ t.plantype }}</td>
+       <td>{{ t.plandescription }}</td>
+
+    </tr>
+
+ {% endfor %}
+
+
+</table>
+
+
+{% endblock %}
